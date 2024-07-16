@@ -1,5 +1,5 @@
-const userScoreSpan = document.getElementById("user-score").textContent;
-const computerScoreSpan = document.getElementById("computer-score").textContent;
+const userScoreSpan = document.getElementById("user-score");
+const computerScoreSpan = document.getElementById("computer-score");
 const resultMessage = document.getElementById("result-message");
 const rockBtn = document.getElementById("rock");
 const paperBtn = document.getElementById("paper");
@@ -10,10 +10,11 @@ const historyList = document.getElementById("history-list");
 let userScore = 0;
 let computerScore = 0;
 
-const choice = [" ROCK", "PAPER", "SCISSORS"];
+const choice = ["ROCK", "PAPER", "SCISSORS"];
 
 function getComputerChoice() {
   const randomIndex = Math.floor(Math.random() * choice.length);
+  console.log(randomIndex)
   return choice[randomIndex];
 }
 getComputerChoice();
@@ -31,35 +32,27 @@ function game(userChoice) {
   ) {
     win(userChoice, computerChoice);
   } else if (
-    (userChoice == "SCISSORS" && computerChoice == "ROCK") ||
-    (userChoice == "PAPER" && computerChoice == "SCISSORSS") ||
+    (userChoice === "SCISSORS" && computerChoice === "ROCK") ||
+    (userChoice === "PAPER" && computerChoice === "SCISSORS") ||
     (userChoice === "ROCK" && computerChoice === "PAPER")
   ) {
     lose(userChoice, computerChoice);
-  }
-  // else if (userChoice === "SCISSORS" && computerChoice === "PAPER") {
-  //   win(userChoice, computerChoice);
-  // } else if (userChoice === "SCISSORS" && computerChoice === "ROCK") {
-  //   lose(userChoice, computerChoice);
-  // } else if (userChoice === "SCISSORS" && computerChoice === "ROCK") {
-  //   lose(userChoice, computerChoice);
-  // }
-  else {
+  } else {
     draw(userChoice, computerChoice);
   }
 }
 
 function win(userChoice, computerChoice) {
   userScore++;
-  userScoreSpan.innerHTML = userScore;
+  userScoreSpan.textContent = userScore;
   // console.log(userScore);
   resultMessage.innerHTML = `${userChoice} beats ${computerChoice}: Plus one point 🎉🎉 `;
   // addHistory(userChoice, computerChoice, win);
 }
 function lose(userChoice, computerChoice) {
   computerScore++;
-  computerScoreSpan.innerHTML = computerScore;
-  console.log(computerScore);
+  computerScoreSpan.textContent = computerScore;
+  // console.log(computerScore);
   resultMessage.innerHTML = `${userChoice} loses to ${computerChoice}😢`;
   // addHistory(userChoice, computerChoice, lose);
 }
